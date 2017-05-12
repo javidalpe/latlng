@@ -11,7 +11,7 @@ npm install latlng --save
 ### Usage
 Give Lnglng a onChange callback:
 ```
-import Latlng from './latlng';
+import Latlng from 'react-input-latlng';
 
 ...
 <Latlng lat={this.state.lat} lng={this.state.lng} onChange={this.updatePoint} decimal=false/>
@@ -19,7 +19,7 @@ import Latlng from './latlng';
 
 
 ### Props
-* **lat**: <float> initial latitude (decimal coordinates)
-* **lng**: <float> initial longitude (decimal coordinates)
-* **decimal**: <boool> if masked input uses decimal coordinates mask.
-* **onChange**: <function(lat,lng)> the function that will recieve the new lat/lng
+* **lat : number|string**: initial latitude (decimal coordinates)
+* **lng : number|string**: initial longitude (decimal coordinates)
+* **decimal : bool**: if masked input uses decimal coordinates mask.
+* **onChange : (lat: number, lng: number)**: A callback which will be called any time the mask's value changes.
