@@ -5,7 +5,7 @@ Accepts degree or decimal coordinates.
 
 ### Installation
 ```
-npm install latlng --save
+npm install react-input-latlng --save
 ```
 
 ### Usage
@@ -21,5 +21,5 @@ import Latlng from 'react-input-latlng';
 ### Props
 * **lat : number|string**: initial latitude (decimal coordinates)
 * **lng : number|string**: initial longitude (decimal coordinates)
-* **decimal : bool**: if masked input uses decimal coordinates mask.
+* **decimal : bool**: uses decimal coordinates mask.
 * **onChange : (lat: number, lng: number)**: A callback which will be called any time the mask's value changes.
