@@ -1,5 +1,5 @@
-## Latitude/Longitude masket input
-A simple masked input for latitude/longitude coordinates.
+## Latitude/Longitude masked input
+A reactjs masked input for latitude/longitude coordinates.
 
 Accepts degree or decimal coordinates.
 
