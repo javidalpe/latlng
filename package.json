@@ -1,0 +1,32 @@
+{
+  "name": "latlng",
+  "version": "1.0.0",
+  "description": "ReactJS masked input for latitude/longitud",
+  "main": "latlng.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javidalpe/latlng.git"
+  },
+  "keywords": [
+    "reactjs",
+    "latitude",
+    "longitude",
+    "geo",
+    "masked",
+    "input"
+  ],
+  "author": "Javier Vidal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/javidalpe/latlng/issues"
+  },
+  "homepage": "https://github.com/javidalpe/latlng#readme",
+  "dependencies": {
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-maskedinput": "^3.3.4",
+  }
+}
