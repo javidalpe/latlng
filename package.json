@@ -1,5 +1,5 @@
 {
-  "name": "latlng",
+  "name": "react-input-latlng",
   "version": "1.0.3",
   "description": "ReactJS masked input for latitude/longitud",
   "main": "dis/latlng.js",
