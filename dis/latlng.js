@@ -4,21 +4,23 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = require('react-dom');
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
 var _reactMaskedinput = require('react-maskedinput');
 
 var _reactMaskedinput2 = _interopRequireDefault(_reactMaskedinput);
 
 var _utils = require('./utils');
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -123,6 +125,7 @@ var Latlng = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+
             if (this.props.decimal) {
                 var lat = this.props.lat;
                 var lng = this.props.lng;
@@ -165,11 +168,6 @@ var Latlng = function (_React$Component) {
                     null,
                     _react2.default.createElement(_reactMaskedinput2.default, { onChange: this.onMaskChanged, value: value, mask: mask, formatCharacters: formatCharacters, style: styles.input })
                 );
-
-                /*var input = (<div>
-                    <input onChange={this.onLatInputChanged} value={lat} style={styles.input}/>
-                    <input onChange={this.onLngInputChanged} value={lng} style={styles.input}/>
-                </div>);*/
             } else {
                 var value = (0, _utils.decimalLatToDegree)(this.props.lat) + " " + (0, _utils.decimalLngToDegree)(this.props.lng);
                 var mask = "11º 11.111' N 111º 11.111' W";
@@ -196,11 +194,11 @@ var Latlng = function (_React$Component) {
                 var input = _react2.default.createElement(_reactMaskedinput2.default, { onChange: this.onMaskChanged, value: value, mask: mask, formatCharacters: formatCharacters, style: styles.input });
             }
 
-            if (window.location.protocol == "https:") {
+            if (window.location.protocol === "https:" && this.props.geolocation) {
                 if (this.state.loadingLocation) {
-                    var iconClass = "fa fa-spinner fa-spin fa-fw";
+                    var iconClass = this.props.iconLocatingClass;
                 } else {
-                    var iconClass = "fa fa-location-arrow fa-fw";
+                    var iconClass = this.props.iconLocateClass;
                 }
                 var location = _react2.default.createElement(
                     'div',
@@ -212,9 +210,11 @@ var Latlng = function (_React$Component) {
                 var location = null;
             }
 
+            var containerStyle = styles.container;
+            var style = _extends({}, containerStyle, this.props.style);
             return _react2.default.createElement(
                 'div',
-                { className: 'hbox', style: styles.container },
+                { className: 'hbox', style: style },
                 location,
                 _react2.default.createElement(
                     'div',
@@ -244,6 +244,32 @@ var styles = {
         alignItems: "center",
         backgroundColor: "white"
     }
+};
+
+Latlng.propTypes = {
+    lat: _propTypes2.default.number,
+    lng: _propTypes2.default.number,
+    decimal: _propTypes2.default.bool,
+    onChange: _propTypes2.default.func,
+    geolocation: _propTypes2.default.bool,
+    iconClass: _propTypes2.default.string,
+    iconLocateClass: _propTypes2.default.string,
+    iconLocatingClass: _propTypes2.default.string,
+    style: _propTypes2.default.object
+};
+
+// Specifies the default values for props:
+Latlng.defaultProps = {
+    lat: 0,
+    lng: 0,
+    decimal: false,
+    onChange: function onChange() {
+        return null;
+    },
+    geolocation: true,
+    iconLocateClass: "fa fa-location-arrow fa-fw",
+    iconLocatingClass: "fa fa-spinner fa-spin fa-fw",
+    style: {}
 };
 
 exports.default = Latlng;

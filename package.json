@@ -1,6 +1,6 @@
 {
   "name": "react-input-latlng",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "ReactJS masked input for latitude/longitud",
   "main": "dis/latlng.js",
   "scripts": {
@@ -26,13 +26,15 @@
   },
   "homepage": "https://github.com/javidalpe/latlng#readme",
   "dependencies": {
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1",
-    "react-maskedinput": "^3.3.4"
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-maskedinput": "^4.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-preset-env": "^1.4.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1"
   }
 }

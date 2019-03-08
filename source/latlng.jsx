@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import MaskedInput from 'react-maskedinput';
 import { decimalLatToDegree, decimalLngToDegree,
     degreeLatToDecimal,degreeLngToDecimal,
     validateLat, validateLng } from './utils';
+import PropTypes from 'prop-types';
 
 class Latlng extends React.Component {
 
@@ -89,6 +89,7 @@ class Latlng extends React.Component {
     }
 
     render() {
+
         if (this.props.decimal) {
             var lat = this.props.lat;
             var lng = this.props.lng;
@@ -123,10 +124,6 @@ class Latlng extends React.Component {
             };
             var input = <div><MaskedInput onChange={this.onMaskChanged} value={value} mask={mask} formatCharacters={formatCharacters} style={styles.input}/></div>;
 
-            /*var input = (<div>
-                <input onChange={this.onLatInputChanged} value={lat} style={styles.input}/>
-                <input onChange={this.onLngInputChanged} value={lng} style={styles.input}/>
-            </div>);*/
         } else {
             var value = decimalLatToDegree(this.props.lat) + " " +decimalLngToDegree(this.props.lng);
             var mask = "11º 11.111' N 111º 11.111' W";
@@ -143,19 +140,21 @@ class Latlng extends React.Component {
             var input = <MaskedInput onChange={this.onMaskChanged} value={value} mask={mask} formatCharacters={formatCharacters} style={styles.input}/>;
         }
 
-        if (window.location.protocol == "https:") {
+        if (window.location.protocol === "https:" && this.props.geolocation) {
             if (this.state.loadingLocation) {
-                var iconClass = "fa fa-spinner fa-spin fa-fw";
+                var iconClass = this.props.iconLocatingClass;
             } else {
-                var iconClass = "fa fa-location-arrow fa-fw";
+                var iconClass = this.props.iconLocateClass;
             }
             var location = <div onClick={this.getLocation} style={styles.compass}><i className={iconClass}></i></div>;
         } else { //Get location not permitted on insecure pages
             var location = null;
         }
 
-        return (
-            <div className="hbox" style={styles.container}>
+	    let containerStyle = styles.container;
+        const style = {...containerStyle, ...this.props.style};
+	    return (
+            <div className="hbox" style={style}>
                 {location}
                 <div style={styles.bounds}>{input}</div>
             </div>
@@ -180,6 +179,30 @@ var styles = {
         alignItems: "center",
         backgroundColor: "white",
     }
+};
+
+Latlng.propTypes = {
+	lat: PropTypes.number,
+	lng: PropTypes.number,
+	decimal: PropTypes.bool,
+	onChange: PropTypes.func,
+    geolocation: PropTypes.bool,
+    iconClass: PropTypes.string,
+	iconLocateClass: PropTypes.string,
+	iconLocatingClass: PropTypes.string,
+    style: PropTypes.object
+};
+
+// Specifies the default values for props:
+Latlng.defaultProps = {
+	lat: 0,
+	lng: 0,
+	decimal: false,
+	onChange: () => null,
+	geolocation: true,
+	iconLocateClass: "fa fa-location-arrow fa-fw",
+	iconLocatingClass: "fa fa-spinner fa-spin fa-fw",
+	style: {}
 };
 
 export default Latlng;
